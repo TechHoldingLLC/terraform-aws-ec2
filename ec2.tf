@@ -42,6 +42,10 @@ resource "aws_instance" "ec2" {
     }
   }
 
+  lifecycle {
+    ignore_changes = [ ami ]
+  }
+
   metadata_options {
     http_endpoint = "enabled"
     http_tokens   = "required"
