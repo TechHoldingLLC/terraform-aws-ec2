@@ -42,6 +42,12 @@ variable "instance_type" {
   default     = "t3.nano"
 }
 
+variable "ipv6_address_count" {
+  description = "IPv6 address count"
+  type        = number
+  default     = 0
+}
+
 variable "key_name" {
   description = "Instance key-pair name"
   type        = string
