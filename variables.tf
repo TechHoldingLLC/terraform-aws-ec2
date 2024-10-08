@@ -33,7 +33,7 @@ variable "ebs_optimized" {
 variable "enable_ipv6" {
   description = "Specifies whether to enable IPv6"
   type        = bool
-  default     = 1
+  default     = true
 }
 
 variable "enable_volume_tags" {
@@ -51,7 +51,7 @@ variable "instance_type" {
 variable "ipv6_address_count" {
   description = "IPv6 address count"
   type        = number
-  default     = 0
+  default     = 1
 }
 
 variable "key_name" {
