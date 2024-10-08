@@ -16,7 +16,7 @@ resource "aws_instance" "ec2" {
   source_dest_check       = var.source_dest_check
   ebs_optimized           = var.ebs_optimized
   volume_tags             = var.enable_volume_tags ? { "Name" = var.name } : null
-  ipv6_address_count      = var.ipv6_address_count
+  ipv6_address_count      = var.enable_ipv6 ? var.ipv6_address_count : 0
 
   dynamic "root_block_device" {
     for_each = var.root_block_device

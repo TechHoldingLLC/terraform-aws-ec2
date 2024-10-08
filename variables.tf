@@ -30,6 +30,12 @@ variable "ebs_optimized" {
   default     = null
 }
 
+variable "enable_ipv6" {
+  description = "Specifies whether to enable IPv6"
+  type        = bool
+  default     = 1
+}
+
 variable "enable_volume_tags" {
   description = "Whether to enable volume tags (if enabled it conflicts with root_block_device/ebs_block_device tags)"
   type        = bool
