@@ -33,7 +33,7 @@ variable "ebs_optimized" {
 variable "enable_ipv6" {
   description = "Specifies whether to enable IPv6"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "enable_volume_tags" {
