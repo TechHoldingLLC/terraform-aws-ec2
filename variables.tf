@@ -30,6 +30,12 @@ variable "ebs_optimized" {
   default     = null
 }
 
+variable "enable_ipv6" {
+  description = "Specifies whether to enable IPv6"
+  type        = bool
+  default     = false
+}
+
 variable "enable_volume_tags" {
   description = "Whether to enable volume tags (if enabled it conflicts with root_block_device/ebs_block_device tags)"
   type        = bool
@@ -40,6 +46,12 @@ variable "instance_type" {
   description = "Instance type"
   type        = string
   default     = "t3.nano"
+}
+
+variable "ipv6_address_count" {
+  description = "IPv6 address count"
+  type        = number
+  default     = 1
 }
 
 variable "key_name" {
