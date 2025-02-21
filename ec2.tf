@@ -17,6 +17,7 @@ resource "aws_instance" "ec2" {
   ebs_optimized           = var.ebs_optimized
   volume_tags             = var.enable_volume_tags ? { "Name" = var.name } : null
   ipv6_address_count      = var.enable_ipv6 ? var.ipv6_address_count : 0
+  iam_instance_profile    = var.create_iam_instance_profile ? aws_iam_instance_profile.ec2_instance[0].name : var.iam_instance_profile
 
   dynamic "root_block_device" {
     for_each = var.root_block_device

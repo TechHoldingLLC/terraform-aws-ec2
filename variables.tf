@@ -54,6 +54,24 @@ variable "ipv6_address_count" {
   default     = 1
 }
 
+variable "create_iam_instance_profile" {
+  description = "Create instance profile"
+  type        = bool
+  default     = false
+}
+
+variable "iam_instance_profile" {
+  description = "IAM instance profile"
+  type        = string
+  default     = null
+}
+
+variable "iam_role_name" {
+  description = "Name to use on IAM role created"
+  type        = string
+  default     = null
+}
+
 variable "key_name" {
   description = "Instance key-pair name"
   type        = string
