@@ -56,3 +56,51 @@ data "aws_iam_policy_document" "dlm_lifecycle_policy" {
     resources = ["*"]
   }
 }
+
+################################################################################
+# IAM Role / Instance Profile
+################################################################################
+locals {
+  iam_role_name = try(coalesce(var.iam_role_name, var.name), "")
+}
+
+data "aws_iam_policy_document" "assume_role_policy" {
+  count = var.create_iam_instance_profile ? 1 : 0
+
+  statement {
+    sid     = "EC2AssumeRole"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "ec2_instance" {
+  count = var.create_iam_instance_profile ? 1 : 0
+
+  name = local.iam_role_name
+  path = "/ec2/"
+
+  assume_role_policy    = data.aws_iam_policy_document.assume_role_policy[0].json
+  force_detach_policies = true
+
+  tags = var.tags
+}
+
+resource "aws_iam_instance_profile" "ec2_instance" {
+  count = var.create_iam_instance_profile ? 1 : 0
+
+  role = aws_iam_role.ec2_instance[0].name
+
+  name = local.iam_role_name
+  path = aws_iam_role.ec2_instance[0].path
+
+  tags = var.tags
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
